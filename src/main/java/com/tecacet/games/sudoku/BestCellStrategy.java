@@ -15,9 +15,7 @@ public class BestCellStrategy implements SudokuStrategy {
         this.game = game;
     }
 
-    /* (non-Javadoc)
-     * @see org.animism.games.sudoku.SudokuStrategy#solve()
-     */
+    @Override
     public void solve() {
         Move move;
         do {
@@ -25,9 +23,7 @@ public class BestCellStrategy implements SudokuStrategy {
         } while (move != null);
     }
 
-    /* (non-Javadoc)
-     * @see org.animism.games.sudoku.SudokuStrategy#move()
-     */
+    @Override
     public Move move() {
         if (game.isSolved()) {
             log.info("Victory!");
@@ -48,25 +44,21 @@ public class BestCellStrategy implements SudokuStrategy {
         moves.push(move);
     }
 
-   
-
     Move pop() {
         if (moves.isEmpty()) {
             return null;
         }
         Move move = undo();
         if (move.crossOut()) {
-            log.info("Undoing move " + move);
+            log.fine("Undoing move " + move);
             return move;
         }
-        log.info("Nothing available at " + move.getRow() + "," + move.getColumn() + ". Popping again...");
+        log.fine("Nothing available at " + move.getRow() + "," + move.getColumn() + ". Popping again...");
         return pop();
 
     }
 
-    /* (non-Javadoc)
-     * @see org.animism.games.sudoku.SudokuStrategy#undo()
-     */
+    @Override
     public Move undo() {
         if (moves.isEmpty()) {
             return null;
@@ -83,8 +75,8 @@ public class BestCellStrategy implements SudokuStrategy {
         }
         return new Move(cell, game.getValidValues(cell.getRow(), cell.getColumn()));
     }
- 
- /**
+
+    /**
      * Find a cell with minimal moves
      */
     protected Cell findBestCell() {
