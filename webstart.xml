@@ -1,0 +1,48 @@
+<project default="dist" xmlns:jw="org.unintelligible.antjnlpwar">
+    <!-- Declare the Ant Web Start task -->
+    <typedef resource="org/unintelligible/antjnlpwar/antjnlpwar.xml" format="xml" uri="org.unintelligible.antjnlpwar"/>
+    <target name="dist">
+        <!-- Create a distributable WAR archive of the application using the following attributes:
+         * tofile: the destination WAR file
+         * codebase: where the application will be deployed to
+         * title: the application name
+         * vendor: your company name
+         * pack200: create pack200 archives for quicker client downloads
+         * signStorePass: the password to your Java certificate store (used to sign the jars)
+         * signAlias: the name of the certificate to use (used to sign the jars)
+         -->
+        <jw:jnlpwar
+            tofile="sudoku.war"
+            codebase="http://localhost:8080/sudoku"
+            title="Sudoku"
+            vendor="Dimitri Papaioannou"
+            allpermissions="false"
+           >
+                <!-- Add a normal and a short description -->
+                <jw:description>This is the descriptive text for the product</jw:description>
+                <jw:description kind="short">This is a short descriptive text for the product</jw:description>
+                <!-- Add an icon for the application -->
+                <!--  
+                <jw:icon file="path/to/icon.jpg"/>
+                -->
+                <!-- Show a splash screen when the application launches -->
+                <!--  
+                <jw:icon kind="splash" file="path/to/splash.jpg"/>
+                -->
+                <!-- Specify the minimal version of Java required by the app, along with
+                 some command-line arguments -->
+                 <!-- 
+                <jw:j2se minVersion="1.4" args="-Xmx250M">
+                    <jw:j2seProperty name="MyApplicationProperty" value="myApplicationPropertyValue"/>
+                </jw:j2se>
+                 -->  
+                <!-- Add the libraries used by the application -->
+                <lib dir="lib">
+                    <include name="**/*.jar"/>
+                </lib>
+                <!-- Specify the main class for the application, 
+                 and the jar it is located in (can be duplicate from the lib element) -->
+                <jw:application mainclass="org.animism.games.sudoku.main.Main" jar="dist\bin\sudoku-solver-1.0.jar"/>
+        </jw:jnlpwar>
+    </target>
+</project>
