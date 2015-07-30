@@ -1,15 +1,21 @@
 package com.tecacet.games.sudoku;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import com.tecacet.games.sudoku.io.ClasspathGameReader;
 import com.tecacet.games.sudoku.io.GameReader;
 
-public class SudokuTest extends TestCase {
+public class SudokuTest  {
 
+	@Test
 	public void testGetSet() {
 		Sudoku game = new Sudoku();
 		game.setValue(0, 1, 2);
@@ -17,6 +23,7 @@ public class SudokuTest extends TestCase {
 		assertEquals(2, game.getValue(0, 1).intValue());
 	}
 
+	@Test
 	public void testIsValidValue() throws IOException {
 		Sudoku game = new Sudoku();
 		game.setValue(0, 0, 2);
@@ -35,6 +42,7 @@ public class SudokuTest extends TestCase {
 		// assertFalse(game.isValidValue(0,6,6));
 	}
 
+	@Test
 	public void testGetValidValues() {
 		Sudoku game = new Sudoku();
 		game.setValue(0, 0, 2);
@@ -47,6 +55,7 @@ public class SudokuTest extends TestCase {
 		assertEquals(7, l.size());
 	}
 
+	@Test
 	public void testCellsFilled() {
 		Sudoku game = new Sudoku();
 		game.setValue(0, 0, 2);

@@ -1,15 +1,15 @@
 package com.tecacet.games.sudoku;
 
-import java.io.IOException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import java.util.ArrayList;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-import com.tecacet.games.sudoku.io.ClasspathGameReader;
-import com.tecacet.games.sudoku.io.GameReader;
+public class BestCellStrategyTest  {
 
-public class BestCellStrategyTest extends TestCase {
-
+	@Test
 	public void testFindBestCell() {
 		Sudoku game = new Sudoku();
 		game.setValue(0, 0, 1);
@@ -21,6 +21,7 @@ public class BestCellStrategyTest extends TestCase {
 		assertEquals(3, cell.getColumn());
 	}
 
+	@Test
 	public void testGetNextMove() {
 		Sudoku game = new Sudoku();
 		game.setValue(0, 0, 1);
@@ -32,6 +33,7 @@ public class BestCellStrategyTest extends TestCase {
 		assertEquals(3, move.getColumn());
 	}
 
+	@Test
 	public void testUndo() {
 		Sudoku game = new Sudoku();
 		BestCellStrategy p = new BestCellStrategy(game);
@@ -49,6 +51,7 @@ public class BestCellStrategyTest extends TestCase {
 		assertEquals(m.getRow(), undo.getRow());
 	}
 
+	@Test
 	public void testPlayMove() {
 		Sudoku game = new Sudoku();
 		BestCellStrategy p = new BestCellStrategy(game);
@@ -61,6 +64,7 @@ public class BestCellStrategyTest extends TestCase {
 		assertEquals(1, game.getValue(0, 0).intValue());
 	}
 
+	@Test
 	public void testPop() {
 		Sudoku game = new Sudoku();
 		BestCellStrategy p = new BestCellStrategy(game);
@@ -82,6 +86,7 @@ public class BestCellStrategyTest extends TestCase {
 		assertNull(p.pop());
 	}
 
+	@Test
 	public void testMove() {
 		Sudoku game = new Sudoku();
 		game.setValue(0, 0, 1);
@@ -99,26 +104,4 @@ public class BestCellStrategyTest extends TestCase {
 		System.out.println(game.toString());
 	}
 
-	// public void testHardGame() throws IOException {
-	// Sudoku game = new Sudoku();
-	// GameReader r = new GameReader();
-	// r.read(game,"games/sample1.txt");
-	// SudokuPlayer p = new SudokuPlayer(game);
-	// // p.solve();
-	// for (int i=0;i<50;i++) {
-	// Move m = p.move();
-	// }
-	// Move m = p.move();
-	// }
-
-	public void testSolve() throws IOException {
-		Sudoku game = new Sudoku();
-		BestCellStrategy p = new BestCellStrategy(game);
-		GameReader r = new ClasspathGameReader();
-		r.read(game, "easy1.sud");
-		System.out.println(game);
-		p.solve();
-		System.out.println(game);
-
-	}
 }

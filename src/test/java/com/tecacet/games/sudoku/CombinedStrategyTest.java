@@ -1,14 +1,17 @@
 package com.tecacet.games.sudoku;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import com.tecacet.games.sudoku.io.ClasspathGameReader;
 import com.tecacet.games.sudoku.io.GameReader;
 
-public class CombinedStrategyTest extends TestCase {
+public class CombinedStrategyTest {
 
+	@Test
 	public void testMove() throws IOException {
 		GameReader reader = new ClasspathGameReader();
 		Sudoku game = new Sudoku();
@@ -19,18 +22,6 @@ public class CombinedStrategyTest extends TestCase {
 		assertEquals(0, move.getRow());
 		assertEquals(2, move.getColumn());
 		assertEquals(1, move.getValue());
-	}
-
-	public void testSolve() throws IOException {
-		Sudoku game = new Sudoku();
-		BestCellStrategy p = new BestCellStrategy(game);
-		GameReader r = new ClasspathGameReader();
-		String filename = "hard1.sud";
-		r.read(game, filename);
-		System.out.println(game);
-		p.solve();
-		System.out.println(game);
-
 	}
 
 }

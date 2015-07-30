@@ -1,11 +1,14 @@
 package com.tecacet.games.sudoku;
 
-import com.tecacet.games.sudoku.Cell;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class CellTest extends TestCase {
+public class CellTest  {
 
+	@Test
 	public void testHashCode() {
 		Cell cell1 = new Cell(2, 3);
 		Cell cell2 = new Cell(5, 1);
@@ -14,6 +17,7 @@ public class CellTest extends TestCase {
 		assertEquals(cell1.hashCode(), cell2.hashCode());
 	}
 
+	@Test
 	public void testEqualsObject() {
 		Cell cell1 = new Cell(2, 3);
 		Cell cell2 = new Cell(5, 1);
@@ -22,6 +26,7 @@ public class CellTest extends TestCase {
 		assertTrue(cell1.equals(cell2));
 	}
 
+	@Test
 	public void testToString() {
 		Cell cell = new Cell(2, 3);
 		assertEquals("(3,4)", cell.toString());
