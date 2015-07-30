@@ -2,3 +2,4 @@
 - enhance about and location of dialogs
 - Create game generator by creating a basic board with 1 2 3 4 etc and then applying a permutation
 - async actions
+- more?
