@@ -49,7 +49,7 @@ public class TextFieldCell extends JTextField {
 		}
 		return false;
 	}
-	
+
 	public void setValue(Integer value) {
 		if (value == null) {
 			this.setText(null);

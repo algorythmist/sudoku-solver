@@ -107,7 +107,13 @@ public class Sudoku {
         }
         cellsFilled = 0;
     }
+    
 
+    public Collection<Neighborhood> getNeighborhoods() {
+        return listOfNeighborhoods;
+    }
+
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < size; i++) {
@@ -117,10 +123,6 @@ public class Sudoku {
             sb.append("\n");
         }
         return sb.toString();
-    }
-
-    public Collection<Neighborhood> getNeighborhoods() {
-        return listOfNeighborhoods;
     }
 
 }

@@ -1,14 +1,13 @@
 package com.tecacet.games.sudoku;
 
 import java.util.LinkedList;
-import java.util.Random;
 
 //TODO generate valid Sudoku games
 public class GameGenerator {
 
     private static final int[] VALUES = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     private Sudoku game = new Sudoku();
-    Random generator = new Random();
+    //private Random generator = new Random();
 
     public void generateSeedGame() {
         LinkedList<Integer> values = new LinkedList<Integer>();
@@ -45,7 +44,7 @@ public class GameGenerator {
         }
     }
 
-    private void rotateleft(LinkedList list) {
+    private <T> void rotateleft(LinkedList<T> list) {
         list.add(list.removeFirst());
     }
 

@@ -11,7 +11,7 @@ public class GameReaderTest extends TestCase {
 	public void testRead() throws IOException {
 		Sudoku game = new Sudoku();
 		GameReader r = new ClasspathGameReader();
-		r.read(game,"games/sample2.sud");
+		r.read(game,"sample2.sud");
 		assertNull(game.getValue(0,0));
 		assertEquals(8,game.getValue(0,3).intValue());
 		assertEquals(9,game.getValue(8,3).intValue());
