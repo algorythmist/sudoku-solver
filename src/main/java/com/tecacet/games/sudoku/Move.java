@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A move represents a player's choice.
- * It consists of a cell and a list of valid values for that cell.
- * The values are applied in the order they appear on the list
+ * A move represents a player's choice. It consists of a cell and a list of
+ * valid values for that cell. The values are applied in the order they appear
+ * on the list
  *
  */
 public class Move {
@@ -44,8 +44,7 @@ public class Move {
 	}
 
 	public String toString() {
-		return cell.toString() + " = " + getValue() + " "
-				+ available.toString();
+		return cell.toString() + " = " + getValue() + " " + available.toString();
 	}
 
 }

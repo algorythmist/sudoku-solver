@@ -2,22 +2,22 @@ package com.tecacet.games.sudoku.gui;
 
 public interface SudokuFacade {
 
-	public void setValue(int row, int col, Integer value);
+	void setValue(int row, int col, Integer value);
 	
 	/**
 	 * Clear all cells and restart game
 	 */
-	public void clear();
+	void clear();
 	
 	/**
 	 * Play the next move
 	 */
-	public void move();
+	void move();
 	
 	/**
 	 * Solve the game
 	 */
-	public void solve();
+	void solve();
 	
 	
 }

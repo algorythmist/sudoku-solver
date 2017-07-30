@@ -16,11 +16,9 @@ import com.tecacet.games.sudoku.io.GameReader;
 
 public class MenuBuilder {
 
-	private static final String[] GAMES = { "easy1.sud", "medium1.sud",
-			"medium2.sud", "hard1.sud", "evil1.sud" };
+	private static final String[] GAMES = { "easy1.sud", "medium1.sud", "medium2.sud", "hard1.sud", "evil1.sud" };
 
-	public static JMenuBar getMenuBar(final SudokuController controller,
-			Component parent) {
+	public static JMenuBar getMenuBar(final SudokuController controller, Component parent) {
 		LoadGameAction loadGameAction = new LoadGameAction(controller, parent);
 		SaveGameAction saveGameAction = new SaveGameAction(controller, parent);
 		AboutAction aboutAction = new AboutAction(parent);
