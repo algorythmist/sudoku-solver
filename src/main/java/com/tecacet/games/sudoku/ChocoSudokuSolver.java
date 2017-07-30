@@ -9,7 +9,6 @@ import org.chocosolver.util.tools.ArrayUtils;
 
 public class ChocoSudokuSolver implements SudokuStrategy {
 
-	
 	private final Sudoku game;
 	
 	public ChocoSudokuSolver(Sudoku game) {

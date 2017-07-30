@@ -2,10 +2,12 @@ package com.tecacet.games.sudoku;
 
 import java.io.IOException;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.tecacet.games.sudoku.io.ClasspathGameReader;
 import com.tecacet.games.sudoku.io.GameReader;
+
 
 public class SolutionComparisonTest {
 
@@ -46,13 +48,14 @@ public class SolutionComparisonTest {
 
 	private void testGame(Sudoku game, String name, SudokuStrategy solver)
 			throws IOException {
+		
 		// read unsolved game
 		reader.read(game, name + ".sud");
 		// read control
 		Sudoku control = new Sudoku();
 		reader.read(control, name + "_control.sud");
 		solver.solve();
-		GameComparator.equals(game, control);
+		Assert.assertTrue(GameComparator.equals(game, control));
 	}
 
 }
