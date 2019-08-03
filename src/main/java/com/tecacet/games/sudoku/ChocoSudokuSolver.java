@@ -8,7 +8,7 @@ import org.chocosolver.solver.variables.VariableFactory;
 import org.chocosolver.util.tools.ArrayUtils;
 
 /**
- * Solve Sudoku using Choco constraint solver
+ * Solve Sudoku using Choco constraint programming solver
  */
 public class ChocoSudokuSolver implements SudokuStrategy {
 
