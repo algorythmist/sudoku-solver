@@ -7,6 +7,9 @@ import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.VariableFactory;
 import org.chocosolver.util.tools.ArrayUtils;
 
+/**
+ * Solve Sudoku using Choco constraint solver
+ */
 public class ChocoSudokuSolver implements SudokuStrategy {
 
 	private final Sudoku game;
