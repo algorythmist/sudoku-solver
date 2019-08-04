@@ -1,10 +1,8 @@
 package com.tecacet.games.sudoku;
 
-import org.chocosolver.solver.Solver;
-import org.chocosolver.solver.constraints.IntConstraintFactory;
-import org.chocosolver.solver.search.strategy.IntStrategyFactory;
+import org.chocosolver.solver.Model;
+import org.chocosolver.solver.search.strategy.Search;
 import org.chocosolver.solver.variables.IntVar;
-import org.chocosolver.solver.variables.VariableFactory;
 import org.chocosolver.util.tools.ArrayUtils;
 
 /**
@@ -21,40 +19,48 @@ public class ChocoSudokuSolver implements SudokuStrategy {
 
 	@Override
 	public void solve() {
-		Solver solver = new Solver("Sudoku");
+		Model model = new Model("Sudoku");
 		int n = 9;
+
+		//row and column variables
 		IntVar[][] rows = new IntVar[n][n];
 		IntVar[][] cols = new IntVar[n][n];
-		IntVar[][] carres = new IntVar[n][n];
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-            	
                 if (game.getValue(i, j) != null) {
-                    rows[i][j] = VariableFactory.fixed(game.getValue(i, j), solver);
+                    //if value is populated it can only have the current value
+                    rows[i][j] = model.intVar(game.getValue(i, j));
                 } else {
-                    rows[i][j] = VariableFactory.enumerated("c_" + i + "_" + j, 1, n, solver);
+                    //otherwise, it can take values from 1 to n
+                    rows[i][j] = model.intVar("c_" + i + "_" + j, 1, n);
                 }
+                //same with columns
                 cols[j][i] = rows[i][j];
             }
         }
 
+        //Define variables for the 9 regions
+        IntVar[][] regions = new IntVar[n][n];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 for (int k = 0; k < 3; k++) {
-                    carres[j + k * 3][i] = rows[k * 3][i + j * 3];
-                    carres[j + k * 3][i + 3] = rows[1 + k * 3][i + j * 3];
-                    carres[j + k * 3][i + 6] = rows[2 + k * 3][i + j * 3];
+                    regions[j + k * 3][i] = rows[k * 3][i + j * 3];
+                    regions[j + k * 3][i + 3] = rows[1 + k * 3][i + j * 3];
+                    regions[j + k * 3][i + 6] = rows[2 + k * 3][i + j * 3];
                 }
             }
         }
 
+        //constraints
         for (int i = 0; i < n; i++) {
-            solver.post(IntConstraintFactory.alldifferent(rows[i], "AC"));
-            solver.post(IntConstraintFactory.alldifferent(cols[i], "AC"));
-            solver.post(IntConstraintFactory.alldifferent(carres[i], "AC"));
+            model.allDifferent(rows[i]).post();  //row values should be all different
+            model.allDifferent(cols[i]).post();  //column values should be all different
+            model.allDifferent(regions[i]).post(); //region values should be all different
         }
-        solver.set(IntStrategyFactory.minDom_LB(ArrayUtils.append(rows)));
-        solver.findSolution();
+        model.getSolver().setSearch(Search.minDomLBSearch(ArrayUtils.append(rows)));
+        model.getSolver().findSolution();
+        //assign the solution values to the game
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 game.setValue(i, j, rows[i][j].getValue());
