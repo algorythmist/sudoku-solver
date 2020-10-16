@@ -5,15 +5,15 @@ import java.util.List;
 
 public class ListenerSupport {
 
-	private List<SudokuEventListener> listeners = new ArrayList<SudokuEventListener>();
+    private final List<SudokuEventListener> listeners = new ArrayList<>();
 
-	public void notifyListeners(SudokuEvent event) {
-		for (SudokuEventListener l : listeners) {
-			l.actionPerformed(event);
-		}
-	}
+    public void notifyListeners(SudokuEvent event) {
+        for (SudokuEventListener l : listeners) {
+            l.actionPerformed(event);
+        }
+    }
 
-	public void addListener(SudokuEventListener listener) {
-		listeners.add(listener);
-	}
+    public void addListener(SudokuEventListener listener) {
+        listeners.add(listener);
+    }
 }

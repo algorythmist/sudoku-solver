@@ -6,39 +6,42 @@ package com.tecacet.games.sudoku;
  */
 public class Cell {
 
-	private static final int BOARD_SIZE = 9;
-	private int row;
-	private int col;
+    private static final int BOARD_SIZE = 9;
+    private final int row;
+    private final int col;
 
-	public Cell(int r, int c) {
-		row = r;
-		col = c;
-	}
+    public Cell(int r, int c) {
+        row = r;
+        col = c;
+    }
 
-	public Cell(Cell cell) {
-		row = cell.row;
-		col = cell.col;
-	}
+    public Cell(Cell cell) {
+        row = cell.row;
+        col = cell.col;
+    }
 
-	public int hashCode() {
-		return Integer.valueOf((BOARD_SIZE + 1) * row + col).hashCode();
-	}
+    public int hashCode() {
+        return Integer.valueOf((BOARD_SIZE + 1) * row + col).hashCode();
+    }
 
-	public boolean equals(Object o) {
-		Cell c = (Cell) o;
-		return row == c.row && col == c.col;
-	}
+    public boolean equals(Object o) {
+        if (!(o instanceof  Cell)) {
+            return false;
+        }
+        Cell c = (Cell) o;
+        return row == c.row && col == c.col;
+    }
 
-	public String toString() {
-		return String.format("(%d,%d)", (row + 1), (col + 1));
-	}
+    public String toString() {
+        return String.format("(%d,%d)", (row + 1), (col + 1));
+    }
 
-	public int getRow() {
-		return row;
-	}
+    public int getRow() {
+        return row;
+    }
 
-	public int getColumn() {
-		return col;
-	}
+    public int getColumn() {
+        return col;
+    }
 
 }

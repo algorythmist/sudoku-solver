@@ -14,7 +14,7 @@ public interface SudokuView {
     void refresh();
 
     void clear(int row, int col);
-    
+
     JComponent getComponent();
 
 }

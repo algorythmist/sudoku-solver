@@ -5,22 +5,21 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * The Sudoku board as an array of cells together with neoghborhood information
- * 
+ * The Sudoku board as an array of cells together with neighborhood information
  */
 public class Sudoku {
 
     private static final int NEIGHBORHOOD_SIZE = 3;
 
-    private Neighborhood[][] neighborhoods;
-    private List<Neighborhood> listOfNeighborhoods;
-    private Integer[][] cells;
-    private int size = NEIGHBORHOOD_SIZE * NEIGHBORHOOD_SIZE;
+    private final Neighborhood[][] neighborhoods;
+    private final List<Neighborhood> listOfNeighborhoods;
+    private final Integer[][] cells;
+    private final int size = NEIGHBORHOOD_SIZE * NEIGHBORHOOD_SIZE;
     private int cellsFilled = 0;
 
     public Sudoku() {
         cells = new Integer[size][size];
-        listOfNeighborhoods = new ArrayList<Neighborhood>();
+        listOfNeighborhoods = new ArrayList<>();
         neighborhoods = new Neighborhood[NEIGHBORHOOD_SIZE][NEIGHBORHOOD_SIZE];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -39,7 +38,7 @@ public class Sudoku {
         int r = row / 3;
         int c = col / 3;
         if (value != null) {
-            neighborhoods[r][c].addValue(value.intValue());
+            neighborhoods[r][c].addValue(value);
         } else {
             neighborhoods[r][c].removeValue(cells[row][col]);
         }
@@ -51,16 +50,12 @@ public class Sudoku {
         return size;
     }
 
-    public void setValue(int row, int col, int value) {
-        setValue(row, col, new Integer(value));
-    }
-
     public Integer getValue(int row, int col) {
         return cells[row][col];
     }
 
     public List<Integer> getValidValues(int row, int col) {
-        List<Integer> values = new ArrayList<Integer>();
+        List<Integer> values = new ArrayList<>();
         for (int i = 1; i <= size; i++) {
             if (isValidValue(row, col, i)) {
                 values.add(i);
@@ -107,7 +102,7 @@ public class Sudoku {
         }
         cellsFilled = 0;
     }
-    
+
 
     public Collection<Neighborhood> getNeighborhoods() {
         return listOfNeighborhoods;
@@ -115,7 +110,7 @@ public class Sudoku {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 sb.append(cells[i][j] == null ? "x " : cells[i][j] + " ");

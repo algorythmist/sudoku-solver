@@ -10,21 +10,21 @@ import org.chocosolver.util.tools.ArrayUtils;
  */
 public class ChocoSudokuSolver implements SudokuStrategy {
 
-	private final Sudoku game;
-	
-	public ChocoSudokuSolver(Sudoku game) {
-		super();
-		this.game = game;
-	}
+    private final Sudoku game;
 
-	@Override
-	public void solve() {
-		Model model = new Model("Sudoku");
-		int n = 9;
+    public ChocoSudokuSolver(Sudoku game) {
+        super();
+        this.game = game;
+    }
 
-		//row and column variables
-		IntVar[][] rows = new IntVar[n][n];
-		IntVar[][] cols = new IntVar[n][n];
+    @Override
+    public void solve() {
+        Model model = new Model("Sudoku");
+        int n = 9;
+
+        //row and column variables
+        IntVar[][] rows = new IntVar[n][n];
+        IntVar[][] cols = new IntVar[n][n];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -66,16 +66,16 @@ public class ChocoSudokuSolver implements SudokuStrategy {
                 game.setValue(i, j, rows[i][j].getValue());
             }
         }
-	}
+    }
 
-	@Override
-	public Move move() {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public Move move() {
+        throw new UnsupportedOperationException();
+    }
 
-	@Override
-	public Move undo() {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public Move undo() {
+        throw new UnsupportedOperationException();
+    }
 
 }

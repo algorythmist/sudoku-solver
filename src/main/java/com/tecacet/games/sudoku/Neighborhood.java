@@ -13,64 +13,53 @@ import java.util.Set;
  */
 public class Neighborhood {
 
-	private Set<Integer> assignedValues = new HashSet<Integer>();
+    private final Set<Integer> assignedValues = new HashSet<>();
+    private final Map<Integer, Set<Cell>> unassignedValues = new HashMap<>();
 
-	private Map<Integer, Set<Cell>> unassignedValues = new HashMap<Integer, Set<Cell>>();
+    private final Sudoku game;
+    private final int startRow;
+    private final int startCol;
 
-	private Sudoku game;
-	private int startRow;
-	private int startCol;
+    public Neighborhood(Sudoku game, int startRow, int startCol) {
+        super();
+        this.game = game;
+        this.startRow = startRow;
+        this.startCol = startCol;
+    }
 
-	public Neighborhood(Sudoku game, int startRow, int startCol) {
-		super();
-		this.game = game;
-		this.startRow = startRow;
-		this.startCol = startCol;
-	}
+    private void populateValue(int i) {
+        unassignedValues.put(i, new HashSet<>());
+        // else assemble the possibilities
+        for (int row = startRow; row < startRow + 3; row++) {
+            for (int col = startCol; col < startCol + 3; col++) {
+                if (game.getValue(row, col) == null
+                        && game.isValidValue(row, col, i)) {
+                    unassignedValues.get(i).add(new Cell(row, col));
+                }
+            }
+        }
+    }
 
-	public void populateValueMap() {
-		for (int i = 1; i <= 9; i++) {
-			if (contains(i)) {
-				continue;
-			}
-			populateValue(i);
-		}
-	}
+    public boolean addValue(int value) {
+        if (assignedValues.contains(value)) {
+            return false;
+        }
+        assignedValues.add(value);
+        unassignedValues.remove(value);
+        return true;
+    }
 
-	private void populateValue(int i) {
-		unassignedValues.put(i, new HashSet<Cell>());
-		// else assemble the possibilities
-		for (int row = startRow; row < startRow + 3; row++) {
-			for (int col = startCol; col < startCol + 3; col++) {
-				if (game.getValue(row, col) == null
-						&& game.isValidValue(row, col, i)) {
-					unassignedValues.get(i).add(new Cell(row, col));
-				}
-			}
-		}
-	}
+    public boolean contains(int value) {
+        return assignedValues.contains(value);
+    }
 
-	public boolean addValue(int value) {
-		Integer v = new Integer(value);
-		if (assignedValues.contains(v)) {
-			return false;
-		}
-		assignedValues.add(v);
-		unassignedValues.remove(v);
-		return true;
-	}
+    public boolean removeValue(Integer value) {
+        populateValue(value);
+        return assignedValues.remove(value);
+    }
 
-	public boolean contains(int value) {
-		return assignedValues.contains(new Integer(value));
-	}
-
-	public boolean removeValue(Integer value) {
-		populateValue(value);
-		return assignedValues.remove(value);
-	}
-
-	public Map<Integer, Set<Cell>> getUnassignedValues() {
-		return unassignedValues;
-	}
+    public Map<Integer, Set<Cell>> getUnassignedValues() {
+        return unassignedValues;
+    }
 
 }
