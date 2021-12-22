@@ -52,7 +52,7 @@ public class ChocoSudokuSolver implements SudokuStrategy {
             }
         }
 
-        //constraints
+        // constraints
         for (int i = 0; i < n; i++) {
             model.allDifferent(rows[i]).post();  //row values should be all different
             model.allDifferent(cols[i]).post();  //column values should be all different
@@ -60,7 +60,7 @@ public class ChocoSudokuSolver implements SudokuStrategy {
         }
         model.getSolver().setSearch(Search.minDomLBSearch(ArrayUtils.append(rows)));
         model.getSolver().findSolution();
-        //assign the solution values to the game
+        // assign the solution values to the game
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 game.setValue(i, j, rows[i][j].getValue());
